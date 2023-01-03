@@ -30,7 +30,7 @@ service EmployeeService {
 }
 
 message Value {
-  float data = 1;
+  float number = 1;
 }
 
 message StatusReply {

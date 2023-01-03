@@ -46,7 +46,7 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                if str(stub.ReturnList(EmployeeService_pb2.Value(data=data))) == 'OK' :
+                if str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == 'OK' :
                     print("The value is in the list!\n")
                 else: 
                     print("The value is NOT in the list!\n")
@@ -57,7 +57,7 @@ def run():
                 except ValueError: 
                     print("The value must be a decimal number, try again!\n")
                     continue
-                response = stub.InsertValue(EmployeeService_pb2.Value(data=data))
+                response = stub.InsertValue(EmployeeService_pb2.Value(number=data))
                 if (str(response) == "OK"):
                     print("All done! The value has been inserted!\n")
                 else:
@@ -80,7 +80,7 @@ def run():
                         exit(1)
                     data.append(l)
                     for values in data:
-                        response = stub.InsertValue(EmployeeService_pb2.Value(data=values))
+                        response = stub.InsertValue(EmployeeService_pb2.Value(number=values))
                     print("All done! The list has been concatenated!\n")
             # Remove an value from list
             elif x == '5':
@@ -89,8 +89,8 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                while str(stub.ReturnList(EmployeeService_pb2.Value(data=data))) == 'OK' :
-                    response = stub.RemoveValue(data=data)
+                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == 'OK' :
+                    response = stub.RemoveValue(number=data)
                 print("All done! The value has been removed!\n")
             # Sort the list
             elif x == '6':
