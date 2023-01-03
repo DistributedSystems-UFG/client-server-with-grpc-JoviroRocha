@@ -45,7 +45,7 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     EmployeeService_pb2_grpc.add_EmployeeServiceServicer_to_server(EmployeeServer(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('[::]:5678')
     server.start()
     server.wait_for_termination()
 
