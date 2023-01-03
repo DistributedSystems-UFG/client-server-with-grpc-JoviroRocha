@@ -5,53 +5,42 @@ import grpc
 import EmployeeService_pb2
 import EmployeeService_pb2_grpc
 
-empDB=[
- {
- 'id':101,
- 'name':'Saravanan S',
- 'title':'Technical Leader'
- },
- {
- 'id':201,
- 'name':'Rajkumar P',
- 'title':'Sr Software Engineer'
- }
- ]
+value=[]
 
 class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
 
-  def CreateEmployee(self, request, context):
-    dat = {
-    'id':request.id,
-    'name':request.name,
-    'title':request.title
-    }
-    empDB.append(dat)
+  def InsertValue(self, request, context):
+    data = request.data
+    self.value = self.value + [data]
     return EmployeeService_pb2.StatusReply(status='OK')
 
-  def GetEmployeeDataFromID(self, request, context):
-    usr = [ emp for emp in empDB if (emp['id'] == request.id) ] 
-    return EmployeeService_pb2.EmployeeData(id=usr[0]['id'], name=usr[0]['name'], title=usr[0]['title'])
-
-  def UpdateEmployeeTitle(self, request, context):
-    usr = [ emp for emp in empDB if (emp['id'] == request.id) ]
-    usr[0]['title'] = request.title
-    return EmployeeService_pb2.StatusReply(status='OK')
-
-  def DeleteEmployee(self, request, context):
-    usr = [ emp for emp in empDB if (emp['id'] == request.id) ]
-    if len(usr) == 0:
+  def SearchValue(self, request, context):
+    data = request.data
+    if data in self.value: 
+      return EmployeeService_pb2.StatusReply(status='OK')
+    else:
       return EmployeeService_pb2.StatusReply(status='NOK')
 
-    empDB.remove(usr[0])
+  def RemoveValue(self, request, context):
+    data = request.data
+    self.value.remove(data)
     return EmployeeService_pb2.StatusReply(status='OK')
 
-  def ListAllEmployees(self, request, context):
-    list = EmployeeService_pb2.EmployeeDataList()
-    for item in empDB:
-      emp_data = EmployeeService_pb2.EmployeeData(id=item['id'], name=item['name'], title=item['title']) 
-      list.employee_data.append(emp_data)
+  def ReturnList(self, request, context):
+    list = EmployeeService_pb2.ValueList()
+    for item in value:
+      value_data = EmployeeService_pb2.Value(data=item['data']) 
+      list.employee_data.append(value_data)
     return list
+
+  def SortAscending(self, request, context):
+    self.value.sort()
+    return EmployeeService_pb2.StatusReply(status='OK')
+
+  def SortDescending(self, request, context):
+    self.value.sort(reverse=True)
+    return EmployeeService_pb2.StatusReply(status='OK')
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -9,44 +9,36 @@ package employee_service;
 
 service EmployeeService {
   
-  // Create an employee record
-  rpc CreateEmployee (EmployeeData) returns (StatusReply) {}
-  
-  // Get an employee´s data
-  rpc GetEmployeeDataFromID (EmployeeID) returns (EmployeeData) {}
-  
-  // Update an employee´s title/position
-  rpc UpdateEmployeeTitle (EmployeeTitleUpdate) returns (StatusReply) {}
-  
-  // Delete an employee
-  rpc DeleteEmployee (EmployeeID) returns (StatusReply) {}
+  // Insert a value on the list
+  rpc InsertValue (Value) returns (StatusReply) {}
 
-  // List all employees
-  rpc ListAllEmployees (EmptyMessage) returns (EmployeeDataList) {}
+  // Search for a value on the list
+  rpc SearchValue (Value) returns (StatusReply) {}
+  
+  // Remove a Value from the list 
+  rpc RemoveValue (Value) returns (StatusReply) {}
+
+  // Return the entire list
+  rpc ReturnList (EmptyMessage) returns (ValueList) {}
+
+  // Sort the list Ascending
+  rpc SortAscending (EmptyMessage) returns (StatusReply) {}
+
+  // Sort the list Descending
+  rpc SortDescending (EmptyMessage) returns (StatusReply) {}
   
 }
 
-message EmployeeData {
-  uint32 id = 1;
-  string name = 2;
-  string title = 3;
+message Value {
+  int32 data = 1;
 }
 
 message StatusReply {
   string status = 1;
 }
 
-message EmployeeID {
-  uint32 id = 1;
-}
-
-message EmployeeTitleUpdate {
-  uint32 id = 1;
-  string title = 2;
-}
-
 message EmptyMessage{}
 
-message EmployeeDataList{
-  repeated EmployeeData employee_data = 1;
+message ValueList{
+  repeated Value value = 1;
 }
