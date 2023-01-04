@@ -29,7 +29,7 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
   def ReturnList(self, request, context):
     list = EmployeeService_pb2.ValueList()
     for item in self.value:
-      value_data = EmployeeService_pb2.Value(data=item['data']) 
+      value_data = EmployeeService_pb2.Value(number=item) 
       list.employee_data.append(value_data)
     return list
 
