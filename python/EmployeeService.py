@@ -5,40 +5,40 @@ import grpc
 import EmployeeService_pb2
 import EmployeeService_pb2_grpc
 
-value=[]
-
 class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
+  
+  value=[]
 
   def InsertValue(self, request, context):
-    data = request.number
-    value = value + [data]
+    data = request.data
+    self.value = self.value + [data]
     return EmployeeService_pb2.StatusReply(status='OK')
 
   def SearchValue(self, request, context):
-    data = request.number
-    if data in value: 
+    data = request.data
+    if data in self.value: 
       return EmployeeService_pb2.StatusReply(status='OK')
     else:
       return EmployeeService_pb2.StatusReply(status='NOK')
 
   def RemoveValue(self, request, context):
-    data = request.number
-    value.remove(data)
+    data = request.data
+    self.value.remove(data)
     return EmployeeService_pb2.StatusReply(status='OK')
 
   def ReturnList(self, request, context):
     list = EmployeeService_pb2.ValueList()
-    for item in value:
-      value_data = EmployeeService_pb2.Value(data=item['number']) 
+    for item in self.value:
+      value_data = EmployeeService_pb2.Value(data=item['data']) 
       list.employee_data.append(value_data)
     return list
 
   def SortAscending(self, request, context):
-    value.sort()
+    self.value.sort()
     return EmployeeService_pb2.StatusReply(status='OK')
 
   def SortDescending(self, request, context):
-    value.sort(reverse=True)
+    self.value.sort(reverse=True)
     return EmployeeService_pb2.StatusReply(status='OK')
 
 
