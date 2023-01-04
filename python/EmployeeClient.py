@@ -91,7 +91,7 @@ def run():
                     print("The value must be a decimal number, try again!\n")
                     continue
                 while str(stub.SearchValue(EmployeeService_pb2.Value(number=data))) == "status: \"OK\"\n":
-                    response = stub.RemoveValue(number=data)
+                    response = stub.RemoveValue(EmployeeService_pb2.Value(number=data))
                 print("All done! The value has been removed!\n")
             # Sort the list
             elif x == '6':
