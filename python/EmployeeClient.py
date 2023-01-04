@@ -46,7 +46,7 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                if str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == 'OK' :
+                if str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "OK" :
                     print("The value is in the list!\n")
                 else: 
                     print("The value is NOT in the list!\n")
@@ -81,15 +81,15 @@ def run():
                     data.append(l)
                     for values in data:
                         response = stub.InsertValue(EmployeeService_pb2.Value(number=values))
-                    print("All done! The list has been concatenated!\n")
-            # Remove an value from list
+                print("All done! The list has been concatenated!\n")
+            # Remove a value from list
             elif x == '5':
                 try:
                     data = float(input("Enter the value you want to remove from the list: "))
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == 'OK' :
+                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "OK" :
                     response = stub.RemoveValue(number=data)
                 print("All done! The value has been removed!\n")
             # Sort the list
