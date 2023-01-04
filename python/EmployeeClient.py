@@ -46,7 +46,12 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                if str(stub.SearchValue(EmployeeService_pb2.Value(number=data))) == "status: \"OK\"" :
+                resp = str(stub.SearchValue(EmployeeService_pb2.Value(number=data)))
+                print(resp)
+                print(type(resp))
+                print("status: \"OK\"")
+                print(type("status: \"OK\"")) 
+                if  resp == "status: \"OK\"" :
                     print("The value is in the list!\n")
                 else: 
                     print("The value is NOT in the list!\n")
