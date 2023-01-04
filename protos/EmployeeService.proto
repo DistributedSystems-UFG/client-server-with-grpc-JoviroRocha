@@ -40,5 +40,5 @@ message StatusReply {
 message EmptyMessage{}
 
 message ValueList{
-  repeated Value number_data = 1;
+  repeated Value = 1;
 }

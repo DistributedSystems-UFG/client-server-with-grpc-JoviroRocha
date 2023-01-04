@@ -30,7 +30,7 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
     list = EmployeeService_pb2.ValueList()
     for item in self.value:
       value_data = EmployeeService_pb2.Value(number=item) 
-      list.number_data.append(value_data)
+      list.append(value_data)
     return list
 
   def SortAscending(self, request, context):
