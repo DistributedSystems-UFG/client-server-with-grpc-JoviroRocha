@@ -11,19 +11,19 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
 
   def InsertValue(self, request, context):
     data = request.number
-    self.value = self.value + [data]
+    value = value + [data]
     return EmployeeService_pb2.StatusReply(status='OK')
 
   def SearchValue(self, request, context):
     data = request.number
-    if data in self.value: 
+    if data in value: 
       return EmployeeService_pb2.StatusReply(status='OK')
     else:
       return EmployeeService_pb2.StatusReply(status='NOK')
 
   def RemoveValue(self, request, context):
     data = request.number
-    self.value.remove(data)
+    value.remove(data)
     return EmployeeService_pb2.StatusReply(status='OK')
 
   def ReturnList(self, request, context):
@@ -34,11 +34,11 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
     return list
 
   def SortAscending(self, request, context):
-    self.value.sort()
+    value.sort()
     return EmployeeService_pb2.StatusReply(status='OK')
 
   def SortDescending(self, request, context):
-    self.value.sort(reverse=True)
+    value.sort(reverse=True)
     return EmployeeService_pb2.StatusReply(status='OK')
 
 
