@@ -47,11 +47,7 @@ def run():
                     print("The value must be a decimal number, try again!\n")
                     continue
                 resp = str(stub.SearchValue(EmployeeService_pb2.Value(number=data)))
-                print(resp)
-                print(type(resp))
-                print("status: \"OK\"")
-                print(type("status: \"OK\"")) 
-                if  resp == "status: \"OK\"" :
+                if  resp == "status: \"OK\"\n" :
                     print("The value is in the list!\n")
                 else: 
                     print("The value is NOT in the list!\n")
@@ -63,7 +59,7 @@ def run():
                     print("The value must be a decimal number, try again!\n")
                     continue
                 response = stub.InsertValue(EmployeeService_pb2.Value(number=data))
-                if (str(response) == "status: \"OK\""):
+                if (str(response) == "status: \"OK\"\n"):
                     print("All done! The value has been inserted!\n")
                 else:
                     print("An error ocurred! Try again\n")
@@ -94,7 +90,7 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "status: \"OK\"":
+                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "status: \"OK\"\n":
                     response = stub.RemoveValue(number=data)
                 print("All done! The value has been removed!\n")
             # Sort the list
