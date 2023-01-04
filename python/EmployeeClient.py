@@ -46,7 +46,7 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                if str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "OK" :
+                if str(stub.SearchValue(EmployeeService_pb2.Value(number=data))) == "OK" :
                     print("The value is in the list!\n")
                 else: 
                     print("The value is NOT in the list!\n")
@@ -89,7 +89,7 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "OK" :
+                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "OK":
                     response = stub.RemoveValue(number=data)
                 print("All done! The value has been removed!\n")
             # Sort the list
