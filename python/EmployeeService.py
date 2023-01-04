@@ -10,19 +10,19 @@ value=[]
 class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
 
   def InsertValue(self, request, context):
-    data = request.data
+    data = request.number
     self.value = self.value + [data]
     return EmployeeService_pb2.StatusReply(status='OK')
 
   def SearchValue(self, request, context):
-    data = request.data
+    data = request.number
     if data in self.value: 
       return EmployeeService_pb2.StatusReply(status='OK')
     else:
       return EmployeeService_pb2.StatusReply(status='NOK')
 
   def RemoveValue(self, request, context):
-    data = request.data
+    data = request.number
     self.value.remove(data)
     return EmployeeService_pb2.StatusReply(status='OK')
 
