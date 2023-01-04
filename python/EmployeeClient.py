@@ -90,7 +90,7 @@ def run():
                 except ValueError:
                     print("The value must be a decimal number, try again!\n")
                     continue
-                while str(stub.ReturnList(EmployeeService_pb2.Value(number=data))) == "status: \"OK\"\n":
+                while str(stub.SearchValue(EmployeeService_pb2.Value(number=data))) == "status: \"OK\"\n":
                     response = stub.RemoveValue(number=data)
                 print("All done! The value has been removed!\n")
             # Sort the list
